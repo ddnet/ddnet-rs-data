@@ -14,6 +14,7 @@ struct Out {
 
 struct PosBO {
 	pos: mat4x2<f32>,
+	unused: array<f32, 2>,
 	offset: vec2<f32>,
 	scale: vec2<f32>,
 }
