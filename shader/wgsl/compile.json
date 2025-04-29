@@ -145,6 +145,14 @@
         }
     },
     {
+        "input": "editor_tile.vert.wgsl",
+        "output": "shader/vulkan/editor_tile.vert.spv"
+    },
+    {
+        "input": "editor_tile.frag.wgsl",
+        "output": "shader/vulkan/editor_tile.frag.spv"
+    },
+    {
         "input": "tile_border.vert.wgsl",
         "output": "shader/vulkan/tile_border.vert.spv"
     },
