@@ -36,9 +36,9 @@ fn main(in: In) -> Out {
 
 #ifdef TW_TEXTURED
 	let tex3d = u32(tile.posx_tex3d >> 16u);
-	var x = (tex3d >> (vertex * 2)) & 1;
-	var y = (tex3d >> (vertex * 2 + 1)) & 1;
-	var tex_index = (tex3d >> 8u) & 255;
+	let x = (tex3d >> (vertex * 2u)) & 1u;
+	let y = (tex3d >> (vertex * 2u + 1u)) & 1u;
+	let tex_index = (tex3d >> 8u) & 255u;
 	out.tex = vec3<f32>(f32(x), f32(y), f32(tex_index));
 #endif
 	return out;
