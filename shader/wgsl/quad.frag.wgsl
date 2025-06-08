@@ -33,12 +33,6 @@ const QUADS_SET_INDEX = 0;
 @binding(0)
 var<uniform> g_quads: array<Quad, TW_MAX_QUADS>;
 
-struct ProjectionMat {
-	pos: mat4x2<f32>,
-	quad_offset: u32,
-}
-var<push_constant> g_proj: ProjectionMat;
-
 @fragment
 fn main(in: In) -> Out {
 	var out = Out();

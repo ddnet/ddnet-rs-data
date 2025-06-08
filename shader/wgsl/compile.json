@@ -115,6 +115,28 @@
         }
     },
     {
+        "input": "quad_grouped.vert.wgsl",
+        "output": "shader/vulkan/quad_grouped.vert.spv"
+    },
+    {
+        "input": "quad_grouped.frag.wgsl",
+        "output": "shader/vulkan/quad_grouped.frag.spv"
+    },
+    {
+        "input": "quad_grouped.vert.wgsl",
+        "output": "shader/vulkan/quad_grouped_textured.vert.spv",
+        "defines": {
+            "TW_TEXTURED": true
+        }
+    },
+    {
+        "input": "quad_grouped.frag.wgsl",
+        "output": "shader/vulkan/quad_grouped_textured.frag.spv",
+        "defines": {
+            "TW_TEXTURED": true
+        }
+    },
+    {
         "input": "spritemulti.vert.wgsl",
         "output": "shader/vulkan/spritemulti.vert.spv"
     },

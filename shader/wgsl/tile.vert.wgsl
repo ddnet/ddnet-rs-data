@@ -3,7 +3,7 @@ struct In {
 }
 
 struct Out {
-    @builtin(position) position: vec4<f32>,
+	@builtin(position) position: vec4<f32>,
 #ifdef TW_TEXTURED
 	@location(0) @interpolate(linear) tex: vec3<f32>,
 #endif

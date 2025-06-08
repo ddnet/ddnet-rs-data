@@ -5,7 +5,7 @@ struct In {
 }
 
 struct Out {
-    @builtin(position) position: vec4<f32>,
+	@builtin(position) position: vec4<f32>,
 	@location(0) color: vec4<f32>,
 #ifdef TW_TEXTURED
 	@location(1) tex: vec3<f32>,
