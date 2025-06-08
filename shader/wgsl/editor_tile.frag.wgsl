@@ -44,84 +44,84 @@ fn map_into_quad_space(u: f32, v: f32, corners: array<vec2<u32>, 4>) -> vec2<f32
 
 	// Calc which corner is which
 	 // corner 0
-    let x0 = corners[0].x;
-    let y0 = corners[0].y;
-    if (x0 == 0u && y0 == 0u) {
-        i00 = 0u;
-    } else if (x0 == 1u && y0 == 0u) {
-        i10 = 0u;
-    } else if (x0 == 1u && y0 == 1u) {
-        i11 = 0u;
-    } else if (x0 == 0u && y0 == 1u) {
-        i01 = 0u;
-    }
-    // corner 1
-    let x1 = corners[1].x;
-    let y1 = corners[1].y;
-    if (x1 == 0u && y1 == 0u) {
-        i00 = 1u;
-    } else if (x1 == 1u && y1 == 0u) {
-        i10 = 1u;
-    } else if (x1 == 1u && y1 == 1u) {
-        i11 = 1u;
-    } else if (x1 == 0u && y1 == 1u) {
-        i01 = 1u;
-    }
-    // corner 2
-    let x2 = corners[2].x;
-    let y2 = corners[2].y;
-    if (x2 == 0u && y2 == 0u) {
-        i00 = 2u;
-    } else if (x2 == 1u && y2 == 0u) {
-        i10 = 2u;
-    } else if (x2 == 1u && y2 == 1u) {
-        i11 = 2u;
-    } else if (x2 == 0u && y2 == 1u) {
-        i01 = 2u;
-    }
-    // corner 3
-    let x3 = corners[3].x;
-    let y3 = corners[3].y;
-    if (x3 == 0u && y3 == 0u) {
-        i00 = 3u;
-    } else if (x3 == 1u && y3 == 0u) {
-        i10 = 3u;
-    } else if (x3 == 1u && y3 == 1u) {
-        i11 = 3u;
-    } else if (x3 == 0u && y3 == 1u) {
-        i01 = 3u;
-    }
+	let x0 = corners[0].x;
+	let y0 = corners[0].y;
+	if (x0 == 0u && y0 == 0u) {
+		i00 = 0u;
+	} else if (x0 == 1u && y0 == 0u) {
+		i10 = 0u;
+	} else if (x0 == 1u && y0 == 1u) {
+		i11 = 0u;
+	} else if (x0 == 0u && y0 == 1u) {
+		i01 = 0u;
+	}
+	// corner 1
+	let x1 = corners[1].x;
+	let y1 = corners[1].y;
+	if (x1 == 0u && y1 == 0u) {
+		i00 = 1u;
+	} else if (x1 == 1u && y1 == 0u) {
+		i10 = 1u;
+	} else if (x1 == 1u && y1 == 1u) {
+		i11 = 1u;
+	} else if (x1 == 0u && y1 == 1u) {
+		i01 = 1u;
+	}
+	// corner 2
+	let x2 = corners[2].x;
+	let y2 = corners[2].y;
+	if (x2 == 0u && y2 == 0u) {
+		i00 = 2u;
+	} else if (x2 == 1u && y2 == 0u) {
+		i10 = 2u;
+	} else if (x2 == 1u && y2 == 1u) {
+		i11 = 2u;
+	} else if (x2 == 0u && y2 == 1u) {
+		i01 = 2u;
+	}
+	// corner 3
+	let x3 = corners[3].x;
+	let y3 = corners[3].y;
+	if (x3 == 0u && y3 == 0u) {
+		i00 = 3u;
+	} else if (x3 == 1u && y3 == 0u) {
+		i10 = 3u;
+	} else if (x3 == 1u && y3 == 1u) {
+		i11 = 3u;
+	} else if (x3 == 0u && y3 == 1u) {
+		i01 = 3u;
+	}
 
 	// Assign res here as fallback, this fallback should never be used
 	// but cannot panic inside a shader
 	var res = vec2<f32>(u, v);
 
 	// Match the configuration and return the transformed (u, v)
-    if        (i00 == 0u && i10 == 1u && i11 == 2u && i01 == 3u) {
-        // identity
-        res = vec2<f32>( u,        v       );
-    } else if (i00 == 1u && i10 == 2u && i11 == 3u && i01 == 0u) {
-        //  90° clockwise
-        res = vec2<f32>( v,        1.0 - u );
-    } else if (i00 == 2u && i10 == 3u && i11 == 0u && i01 == 1u) {
-        // 180°
-        res = vec2<f32>( 1.0 - u,  1.0 - v );
-    } else if (i00 == 3u && i10 == 0u && i11 == 1u && i01 == 2u) {
-        // 270° clockwise
-        res = vec2<f32>( 1.0 - v,  u       );
-    } else if (i00 == 1u && i10 == 0u && i11 == 3u && i01 == 2u) {
-        // mirror X
-        res = vec2<f32>( 1.0 - u,  v       );
-    } else if (i00 == 3u && i10 == 2u && i11 == 1u && i01 == 0u) {
-        // mirror Y
-        res = vec2<f32>( u,        1.0 - v );
-    } else if (i00 == 0u && i10 == 3u && i11 == 2u && i01 == 1u) {
-        // mirror diag y=x
-        res = vec2<f32>( v,        u       );
-    } else if (i00 == 2u && i10 == 1u && i11 == 0u && i01 == 3u) {
-        // mirror diag y=1−x
-        res = vec2<f32>( 1.0 - v,  1.0 - u );
-    }
+	if        (i00 == 0u && i10 == 1u && i11 == 2u && i01 == 3u) {
+		// identity
+		res = vec2<f32>( u,        v       );
+	} else if (i00 == 1u && i10 == 2u && i11 == 3u && i01 == 0u) {
+		//  90° clockwise
+		res = vec2<f32>( v,        1.0 - u );
+	} else if (i00 == 2u && i10 == 3u && i11 == 0u && i01 == 1u) {
+		// 180°
+		res = vec2<f32>( 1.0 - u,  1.0 - v );
+	} else if (i00 == 3u && i10 == 0u && i11 == 1u && i01 == 2u) {
+		// 270° clockwise
+		res = vec2<f32>( 1.0 - v,  u       );
+	} else if (i00 == 1u && i10 == 0u && i11 == 3u && i01 == 2u) {
+		// mirror X
+		res = vec2<f32>( 1.0 - u,  v       );
+	} else if (i00 == 3u && i10 == 2u && i11 == 1u && i01 == 0u) {
+		// mirror Y
+		res = vec2<f32>( u,        1.0 - v );
+	} else if (i00 == 0u && i10 == 3u && i11 == 2u && i01 == 1u) {
+		// mirror diag y=x
+		res = vec2<f32>( v,        u       );
+	} else if (i00 == 2u && i10 == 1u && i11 == 0u && i01 == 3u) {
+		// mirror diag y=1−x
+		res = vec2<f32>( 1.0 - v,  1.0 - u );
+	}
 
 	return res;
 }

@@ -5,7 +5,7 @@ struct In {
 }
 
 struct Out {
-    @builtin(position) position: vec4<f32>,
+	@builtin(position) position: vec4<f32>,
 	@location(0) @interpolate(linear) tex: vec2<f32>,
 	@location(1) @interpolate(linear) color: vec4<f32>,
 }
