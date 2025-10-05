@@ -63,10 +63,17 @@ fn glass(uv: vec2<f32>, in_color: vec4<f32>) -> vec4<f32> {
 	let scaled_uv = (uv - center) / g_glass.size;
 	let p = scaled_uv * 2.0;
 	let d = sd_superellipse(p, g_glass.elipse_strength, 1.0);
+
+	let original = vec4(textureSample(g_texture, g_sampler, uv).xyz, 1.0);
+    let edge_width = max(fwidth(d), 1e-4);
+
 	if d > 0.0 {
-		return textureSample(g_texture, g_sampler, uv);
+		return original;
 	}
 	let dist = -d;
+
+    // Edge fade: 1 at center, 0 at the boundary, fading over edge_width
+    let edge_alpha: f32 = smoothstep(0.0, edge_width, dist);
 	let sample_p = p * pow(falloff_curve(dist), g_glass.refraction_falloff);
 
     // Map back into UV space
@@ -74,7 +81,7 @@ fn glass(uv: vec2<f32>, in_color: vec4<f32>) -> vec4<f32> {
 
 	// Out of bounds
 	if max(coord.x, coord.y) > 1.0 || min(coord.x, coord.y) < 0.0 {
-		return textureSample(g_texture, g_sampler, uv);
+		return original;
 	}
 
     // Simple UV-based noise
@@ -83,7 +90,12 @@ fn glass(uv: vec2<f32>, in_color: vec4<f32>) -> vec4<f32> {
 	let base = textureSample(g_texture, g_sampler, coord);
 	let color = base + noise * g_glass.noise;
 	let mul = glow_from_uv(scaled_uv) * g_glass.glow_weight * smoothstep(g_glass.glow_edge0, g_glass.glow_edge1, dist) + 1.0 + g_glass.glow_bias;
-	return color * vec4(vec3(mul), 1.0) * in_color;
+	return 
+		vec4(color.xyz, 1.0)
+		* vec4(vec3(mul), 1.0)
+		* vec4(in_color.xyz, 1.0)
+		* edge_alpha
+		+ original * (1.0 - edge_alpha);
 }
 
 @fragment
