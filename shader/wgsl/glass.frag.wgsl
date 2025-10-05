@@ -65,7 +65,7 @@ fn glass(uv: vec2<f32>, in_color: vec4<f32>) -> vec4<f32> {
 	let d = sd_superellipse(p, g_glass.elipse_strength, 1.0);
 
 	let original = vec4(textureSample(g_texture, g_sampler, uv).xyz, 1.0);
-    let edge_width = max(fwidth(d), 1e-4);
+    let edge_width = clamp(fwidth(d), 1e-4, 1.0);
 
 	if d > 0.0 {
 		return original;
