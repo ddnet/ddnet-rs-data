@@ -15,7 +15,7 @@ struct FragColor {
 	padding: array<f32, 12>,
 	color: vec4<f32>,
 }
-var<push_constant> g_color: FragColor;
+var<immediate> g_color: FragColor;
 
 @fragment
 fn main(in: In) -> Out {

@@ -17,7 +17,7 @@ struct MultipliedColor {
 	padding: array<f32, 12>,
 	color: vec4<f32>,
 }
-var<push_constant> g_color: MultipliedColor;
+var<immediate> g_color: MultipliedColor;
 
 @fragment
 fn main(in: In) -> Out

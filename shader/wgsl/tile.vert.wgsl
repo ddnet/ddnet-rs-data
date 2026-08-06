@@ -14,7 +14,7 @@ struct PosBO {
 	pos_y: f32,
 	alignment: f32,
 }
-var<push_constant> g_pos: PosBO;
+var<immediate> g_pos: PosBO;
 
 struct Tile {
 	posx_tex3d: u32,

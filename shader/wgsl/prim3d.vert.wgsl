@@ -15,7 +15,7 @@ struct Out {
 struct ProjectionMat {
 	pos: mat4x2<f32>,
 }
-var<push_constant> g_proj: ProjectionMat;
+var<immediate> g_proj: ProjectionMat;
 
 @vertex
 fn main(in: In) -> Out

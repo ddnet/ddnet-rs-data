@@ -23,7 +23,7 @@ struct GlassProps {
     glow_edge0: f32,
     glow_edge1: f32,
 }
-var<push_constant> g_glass: GlassProps;
+var<immediate> g_glass: GlassProps;
 
 struct In {
 	@location(0) @interpolate(linear) pos: vec2<f32>,

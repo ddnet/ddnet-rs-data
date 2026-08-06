@@ -17,7 +17,7 @@ struct ProjectionMat {
 	rotation: f32,
 #endif
 }
-var<push_constant> g_proj: ProjectionMat;
+var<immediate> g_proj: ProjectionMat;
 
 @vertex
 fn main(in: In) -> Out

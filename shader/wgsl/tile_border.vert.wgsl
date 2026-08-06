@@ -18,7 +18,7 @@ struct PosBO {
 	offset: vec2<f32>,
 	scale: vec2<f32>,
 }
-var<push_constant> g_pos: PosBO;
+var<immediate> g_pos: PosBO;
 
 @vertex
 fn main(in: In) -> Out {

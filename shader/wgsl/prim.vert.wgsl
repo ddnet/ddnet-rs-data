@@ -7,7 +7,7 @@ struct In {
 struct PosBO {
 	pos: mat4x2<f32>,
 }
-var<push_constant> g_pos: PosBO;
+var<immediate> g_pos: PosBO;
 
 struct Out {
 	@builtin(position) position: vec4<f32>,

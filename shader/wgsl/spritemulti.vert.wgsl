@@ -15,7 +15,7 @@ struct ProjectionMat {
 	pos: mat4x2<f32>,
 	center: vec2<f32>,
 }
-var<push_constant> g_proj: ProjectionMat;
+var<immediate> g_proj: ProjectionMat;
 
 /// Rotation, scaling, positioning
 struct Rsp {

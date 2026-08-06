@@ -21,7 +21,7 @@ struct Frag {
 	color: vec4<f32>,
 	layer_size: vec2<u32>,
 }
-var<push_constant> g_frag: Frag;
+var<immediate> g_frag: Frag;
 
 /**
 * The idea

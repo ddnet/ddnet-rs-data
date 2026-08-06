@@ -9,7 +9,7 @@ struct BlurProps {
 	color: vec4<f32>,
 	radius: f32,
 }
-var<push_constant> g_blur: BlurProps;
+var<immediate> g_blur: BlurProps;
 
 struct In {
 	@location(0) @interpolate(linear) pos: vec2<f32>,
